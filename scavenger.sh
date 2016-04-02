@@ -24,11 +24,11 @@ newChapter() {
     Announce 0 "Chapter $curChapter: $title"
     curChapter=$((curChapter + 1))
     while true; do
-        read -p "$(Text 0 "Do you want to skip this chapter? ")" yn
+        read -p "$(Text bold "Do you want to skip this chapter? ")" yn
         case $yn in
             yes ) return 1;;
             no ) return 0;;
-            * ) Text 2 "Please answer yes or no.\n";;
+            * ) Text red "Please answer yes or no.\n";;
         esac
     done
 }
@@ -38,7 +38,7 @@ runTasks() {
 
     for task in $tasks; do
         if ! runSingleTask "$task"; then
-            Announce 2 "ERROR: task $task aborted"
+            Announce red "ERROR: task $task aborted"
         fi
     done
 }
@@ -48,11 +48,11 @@ runSingleTask() {
 
     taskFile="$taskDir/$taskName"
     if [ ! -f "$taskFile" ]; then
-        Text 2 "$taskFile does not exist or is not a file\n"
+        Text red "$taskFile does not exist or is not a file\n"
         return 1
     fi
     if [ ! -x "$taskFile" ]; then
-        Text 2 "$taskFile is not executable\n"
+        Text red "$taskFile is not executable\n"
         return 1
     fi
 
@@ -91,11 +91,11 @@ binDir="/usr/local/bin"
 sourceDir="/scavenger"
 taskDir="$sourceDir/tasks"
 
-Announce 0 "Welcome to the ResComp Scavenger Hunt!"
+Announce bold "Welcome to the ResComp Scavenger Hunt!"
 doSetup
 
 if newChapter "Life in the Shell"; then
     runTasks "sampleTask"
 fi
 
-Announce 1 "You've completed the ResComp Scavenger Hunt!"
+Announce blue "You've completed the ResComp Scavenger Hunt!"

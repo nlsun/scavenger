@@ -5,16 +5,16 @@ SubmitPipe="$PipeDir/submit"
 ExitMsg='You can now exit out of this shell with the keys ctrl+d or the `exit` command'
 
 Text() {
-    setting="$1" # "0" = bold, "1" = blue, "2" = red
+    setting="$1"
     message=$2
 
     normal=$(tput sgr0)
     different=$(tput bold)
-    if [ "$setting" = "1" ]; then
+    if [ "$setting" = "bold" ]; then
         different="${different}$(tput setaf 4)"
-    elif [ "$setting" = "2" ]; then
+    elif [ "$setting" = "blue" ]; then
         different="${different}$(tput setaf 1)"
-    elif [ "$setting" = "3" ]; then
+    elif [ "$setting" = "red" ]; then
         different=$normal
     fi
 
